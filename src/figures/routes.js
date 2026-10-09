@@ -80,7 +80,9 @@ function mount({ stage, svg, read }, lift) {
     const shown = i < 0 ? 2 : i;
     routes.forEach((route) => {
       route.cable.forEach((part) => tset(part.tw, route.i === shown ? 1 : 0, now, route.i === shown ? part.k * 75 : 0));
-      tset(route.pull, route.i === shown ? (i < 0 ? 2 : lift) : 0, now, route.i === shown ? 150 : 0);
+      const raw = i < 0 ? 0 : Math.abs(route.i - i), distance = i < 0 ? Infinity : Math.min(raw, PORTS.length - raw);
+      const target = i < 0 ? (route.i === shown ? 2 : 0) : route.i === i ? lift : distance === 1 ? lift * 0.18 : 0;
+      tset(route.pull, target, now, route.i === i ? 150 : distance === 1 ? 48 : 0);
       route.jack.sil.classList.toggle("hi", route.i === shown);
       route.slot.classList.toggle("hi", route.i === shown); route.slot.classList.toggle("lo", route.i !== shown);
       route.led.classList.toggle("dot", route.i === shown); route.led.classList.toggle("off", route.i !== shown);

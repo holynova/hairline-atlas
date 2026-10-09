@@ -931,7 +931,8 @@ function mount({ stage, svg, read }, travel) {
     if (i === active) return;
     const now = performance.now(), prior = i < 0 ? active : i; active = i;
     items.forEach((item) => {
-      const target = item.page === i && i >= 0 ? travel : item.depth === 1 && i >= 0 && item.parent === items[3 + i].parent ? travel * 0.64 : item.depth === 0 && i >= 0 ? travel * 0.34 : item.rest;
+      const sibling = item.page !== undefined && i >= 0 && item.parent === items[3 + i].parent;
+      const target = item.page === i && i >= 0 ? travel : item.depth === 1 && i >= 0 && item.parent === items[3 + i].parent ? travel * 0.64 : item.depth === 0 && i >= 0 ? travel * 0.34 : sibling ? travel * 0.22 : item.rest;
       tset(item.pull, target, now, item.depth * 75);
     });
     read.textContent = i < 0 ? "rest" : `page ${Math.floor(i / 2) + 1}·${(i % 2) + 1}`;
