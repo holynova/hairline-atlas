@@ -885,32 +885,44 @@ function mount({ stage, svg, read }, travel) {
   const P = proj(C), front = facing(C), g = mk("g", {}, svg);
   mk("path", { d: open([P(-89, 31, 8), P(90, 31, 8)]), class: "nf lo" }, g);
   mk("path", { d: open([P(-89, 20, 8), P(90, 20, 8)]), class: "nf dash" }, g);
+  for (let x = -84; x <= 84; x += 14) mk("path", { d: open([P(x, 18, 8), P(x, 33, 8)]), class: "nf lo" }, g);
+  mk("path", { d: open([P(-89, 0, 69), P(90, 0, 69)]), class: "nf lo" }, g);
+  [-86, 0, 86].forEach((x) => mk("path", { d: open([P(x, 0, 8), P(x, 0, 74), P(x + 8, 0, 74)]), class: "nf dash" }, g));
   const cars = CENTRES.map((cx, i) => {
     const group = mk("g", {}, g), wheels = [];
     for (const dx of [-15, 15]) wheels.push(mk("path", { class: "nf lo" }, group));
     const shell = solid(group);
     const windows = [];
     for (let k = 0; k < 3; k++) windows.push(mk("path", { class: "nf lo" }, group));
-    const door = mk("path", { class: "nf lo" }, group);
+    const glazing = Array.from({ length: 3 }, () => mk("path", { class: "nf lo" }, group));
+    const door = mk("path", { class: "nf lo" }, group), doorSplit = mk("path", { class: "nf lo" }, group);
+    const underbody = mk("path", { class: "nf lo" }, group), roof = mk("path", { class: "nf lo" }, group), roofFins = mk("path", { class: "nf lo" }, group);
     const trolley = mk("path", { class: "nf lo" }, group);
-    return { cx, i, shell, wheels, windows, door, trolley, lift: tween(REST[i]) };
+    const wheelRims = Array.from({ length: 2 }, () => mk("path", { class: "nf lo" }, group));
+    return { cx, i, shell, wheels, windows, glazing, door, doorSplit, underbody, roof, roofFins, trolley, wheelRims, lift: tween(REST[i]) };
   });
   const couplers = [mk("path", { class: "nf lo" }, g), mk("path", { class: "nf lo" }, g)];
   let active = -1;
   function draw(car, now) {
     const z = tval(car.lift, now), cx = car.cx, localP = (x, y, h) => P(x + cx, y, h + z);
-    const [outer, inner] = rings(cx - 25, -17, cx + 25, 17, 8, 1.1);
+    const [outer, inner] = rings(-25, -17, 25, 17, 8, 1.1);
     put(car.shell, prism(localP, front, outer, inner, 18, 46));
     car.wheels.forEach((el, k) => {
       const x = cx + (k === 0 ? -15 : 15), circle = circ(7.5, 28).map((q) => P(x + q.u, 17, 16 + q.v + z));
       el.setAttribute("d", open(circle));
+      car.wheelRims[k].setAttribute("d", open(circ(3.6, 20).map((q) => P(x + q.u, 17.2, 16 + q.v + z))));
     });
     car.windows.forEach((el, k) => {
       const x0 = cx - 18 + k * 12, pane = rrect(x0, 29, x0 + 9, 41, 2, 4);
       el.setAttribute("d", open(pane.map((q) => P(q.u, 17.2, q.v + z))));
+      car.glazing[k].setAttribute("d", open([P(x0 + 4.5, 17.4, 30 + z), P(x0 + 4.5, 17.4, 40 + z)]));
     });
     const door = rrect(cx + 12, 19, cx + 21, 44, 2, 4);
     car.door.setAttribute("d", open(door.map((q) => P(q.u, 17.3, q.v + z))));
+    car.doorSplit.setAttribute("d", open([P(cx + 16.5, 17.5, 21 + z), P(cx + 16.5, 17.5, 42 + z)]));
+    car.underbody.setAttribute("d", open(rrect(cx - 21, 18, cx + 21, 23, 2, 4).map((q) => P(q.u, 14, q.v + z))));
+    car.roof.setAttribute("d", open(rrect(cx - 14, -8, cx + 14, 8, 3, 4).map((q) => P(q.u, q.v, 46 + z))));
+    car.roofFins.setAttribute("d", [-7, -3, 1, 5].map((x) => open([P(cx + x, -6, 46.3 + z), P(cx + x, 6, 46.3 + z)])).join(""));
     car.trolley.setAttribute("d", car.i === 1 ? open([P(cx - 8, 0, 46 + z), P(cx - 2, 0, 61 + z), P(cx + 8, 0, 61 + z), P(cx + 13, 0, 46 + z)]) : "");
     const highlighted = car.i === (active < 0 ? 1 : active);
     car.shell.sil.classList.toggle("hi", highlighted);
