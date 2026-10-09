@@ -1,0 +1,22 @@
+{
+  "name": "hairline-atlas",
+  "version": "1.0.0",
+  "description": "A collection of fifty interactive Hairline drawings across five visual subjects.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/build-figures.mjs",
+    "dev": "npm run build && python3 -m http.server 8080 --directory dist",
+    "deploy:check": "npm run build && wrangler deploy --dry-run --config wrangler.jsonc",
+    "deploy": "npm run build && wrangler deploy --config wrangler.jsonc"
+  },
+  "devDependencies": {
+    "wrangler": "4.149.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "workerd@1.20261006.1": true
+  }
+}

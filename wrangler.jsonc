@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "hairline-atlas",
+  "compatibility_date": "2026-10-09",
+  "workers_dev": false,
+  "assets": {
+    "directory": "./dist"
+  },
+  "routes": [
+    {
+      "pattern": "hairline-atlas.xiaosang.cc",
+      "custom_domain": true
+    }
+  ]
+}

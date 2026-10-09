@@ -6,6 +6,7 @@ import { assemble, nameOf } from "../.agents/skills/hairline-create/build.mjs";
 const root=resolve(fileURLToPath(new URL("..",import.meta.url)));
 const out=join(root,"dist"),figureOut=join(out,"figures");
 const catalog=JSON.parse(readFileSync(join(root,"src/catalog.json"),"utf8"));
+const releaseVersion=JSON.parse(readFileSync(join(root,"package.json"),"utf8")).version;
 const readouts={lamp:"fold",moka:"brew",clock:"strike",turntable:"track",scissors:"shear",sewing:"stitch",watch:"time",locomotive:"drive",helicopter:"rotor",biplane:"prop",balloon:"rise",rowboat:"sweep",cablecar:"travel",roadster:"steer",dns:"resolve",balancer:"route",cache:"hit",queue:"advance",btree:"search",auth:"verify",cdn:"edge",mona:"recede",starry:"swirl",wave:"curl",pearl:"sway",scream:"surge",lilies:"ripple",venus:"unfold",kiss:"gather",nightwatch:"lead",meninas:"reflect",gears:"mesh",crank:"slide",cam:"lift",pulley:"hoist",scissor:"raise",ratchet:"step",rack:"translate",fourbar:"swing",geneva:"index",press:"press"};
 const escaped=(value)=>String(value).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;");
 function specialize(template,kind){
@@ -78,6 +79,7 @@ const html=`<!doctype html>
   <meta name="theme-color" content="#f2f1ed">
   <meta name="description" content="Hairline Atlas 线感物集：五类、五十张细致的交互线稿，涵盖日常物件、交通工具、网站结构、世界名画与机械原理。">
   <title>${escaped(catalog.title)}</title>
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="e01c9f78-4607-4e60-b01c-77c8190b12b4"></script>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -89,7 +91,7 @@ const html=`<!doctype html>
     ${sections}
     <section class="method" aria-labelledby="method-title"><div><p class="eyebrow">THE METHOD　/　HAIRLINE</p><h2 id="method-title">线条少一点，<br>动作准一点。</h2></div><div class="method-copy"><p>每张图都是一页独立的互动线稿：静止时先读出形体，移动指针再触发一个清楚的动作。物件、画面与机构都从具体结构出发，动作结束后回到安静的状态。</p><a class="text-link" href="https://hairline.lucasmarkes.com/skill" target="_blank" rel="noreferrer">了解 Hairline 的绘制方法 <span aria-hidden="true">↗</span></a></div><div class="method-footer"><span>ONE SUBJECT</span><span>ONE GESTURE</span><span>ONE READOUT</span></div></section>
   </main>
-  <footer class="footer"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>HAIRLINE ATLAS <em>线感物集</em></span></a><p>图形方法来自 <a href="https://hairline.lucasmarkes.com/skill" target="_blank" rel="noreferrer">Hairline by Lucas Marques</a>。本页收录五十张独立线稿。</p><a class="to-top" href="#top">回到开头 ↑</a></footer>
+  <footer class="footer"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>HAIRLINE ATLAS <em>线感物集</em></span></a><p>图形方法来自 <a href="https://hairline.lucasmarkes.com/skill" target="_blank" rel="noreferrer">Hairline by Lucas Marques</a>。本页收录五十张独立线稿。 <a href="https://github.com/holynova/hairline-atlas" target="_blank" rel="noreferrer">GitHub 仓库 ↗</a>　v${escaped(releaseVersion)}</p><a class="to-top" href="#top">回到开头 ↑</a></footer>
 </body></html>`;
 writeFileSync(join(out,"index.html"),html);
 console.log(`built ${entries.length} standalone figures and ${catalog.groups.length} gallery chapters`);

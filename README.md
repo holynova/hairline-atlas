@@ -1,27 +1,35 @@
-# Hairline Atlas · 线感物集
+# Hairline Atlas / 线感物集
 
-A collection of fifty pointer-responsive Hairline drawings: ten each across everyday objects, transport, digital systems, world masterpieces, and mechanical principles. Every entry is a standalone HTML figure, and the gallery groups them into five chapters.
+中文：五组互动线稿图集，收录日常物件、交通工具、网站结构、世界名画与机械原理各十张。指针触发部件动作，每张作品也可单独打开与播放。
 
-## Run locally
+English: Fifty pointer-responsive line drawings across everyday objects, transport, digital systems, world masterpieces, and mechanical principles. Each figure opens as a standalone interactive page.
 
-Open `dist/index.html`, or serve `dist/` with a static file server:
+![Hairline Atlas desktop screenshot](./assets/screenshot.png)
 
-```sh
-python3 -m http.server 8080 --directory dist
+## 在线体验 / Live Demo
+
+- [Cloudflare Demo](https://hairline-atlas.xiaosang.cc/)（HTTPS 与页面验证进行中）
+- [GitHub Repo](https://github.com/holynova/hairline-atlas)
+
+<img src="./assets/qr.png" width="180" alt="QR code for the Hairline Atlas Cloudflare demo">
+
+## 本地运行 / Run locally
+
+Requires Node.js 20 or later and Python 3.
+
+```bash
+npm install
+npm run dev
 ```
 
-## Edit and rebuild
+## 构建与发布 / Build and deploy
 
-The collection and gallery copy live in `src/catalog.json`. The original nine figures are in `src/figures/`; the expanded scenes use the five category templates in `src/templates/`. Each template keeps the Hairline drawing engine fixed and gives every scene its own geometry and pointer-driven movement.
-
-Rebuild the fifty standalone pages and the gallery with:
-
-```sh
-node scripts/build-figures.mjs
+```bash
+npm run build
+npm run deploy:check
+npm run deploy
 ```
 
-The script writes `dist/figures/*.html`, `dist/index.html`, and `dist/styles.css`. Figure validation and visual review use the included `hairline-create` skill under `.agents/skills/hairline-create`.
+Cloudflare Worker: `hairline-atlas` · Custom Domain: `hairline-atlas.xiaosang.cc`.
 
-## Attribution
-
-The drawing method and creator skill are by Lucas Marques. See the [Hairline skill](https://hairline.lucasmarkes.com/skill) and [MIT-licensed source](https://github.com/lucasmarkes/hairline).
+The Hairline figure engine and method are by Lucas Marques, used under the included MIT license. See [the Hairline skill](https://hairline.lucasmarkes.com/skill) and [upstream source](https://github.com/lucasmarkes/hairline).
