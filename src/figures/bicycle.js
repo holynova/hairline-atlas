@@ -21,7 +21,7 @@ function mount({ stage, svg, read }, maxTurn) {
   mk("path", { d: open(wheel(P, A[0], 1.2, A[2], 8)), class: "nf lo" }, g);
   mk("path", { d: open(circ(3.2, 20).map((q) => P(A[0] + q.u, A[1] + 1.4, A[2] + q.v))), class: "nf sil" }, g);
   mk("path", { d: open([P(A[0], A[1] - 1.6, A[2]), P(A[0], A[1] + 1.6, A[2])]), class: "nf lo" }, g);
-  const frame = mk("path", { class: "nf sil" }, g);
+  const frame = mk("path", { class: "sil" }, g);
   frame.setAttribute("d", open([P(...A), P(...seat), P(...crank), P(...A), P(...head), P(...seat), P(...head), P(...B)]));
   mk("path", { d: open([P(A[0], 1.1, A[2]), P(seat[0], 1.1, seat[2]), P(crank[0], 1.1, crank[2]), P(A[0], 1.1, A[2]), P(head[0], 1.1, head[2]), P(seat[0], 1.1, seat[2]), P(head[0], 1.1, head[2]), P(B[0], 1.1, B[2])]), class: "nf lo" }, g);
   mk("path", { d: open([P(...seat), P(-21, 0, 58), P(-33, 0, 59), P(-39, 0, 57), P(-28, 0, 55), P(...seat)]), class: "nf hi" }, g);
@@ -34,6 +34,27 @@ function mount({ stage, svg, read }, maxTurn) {
   mk("path", { d: open(circ(7.2, 28).map((q) => P(crank[0] + q.u, -1, crank[2] + q.v))), class: "nf lo" }, g);
   mk("path", { d: open(circ(6.2, 28).map((q) => P(A[0] + q.u, -1, A[2] + q.v))), class: "nf lo" }, g);
   mk("path", { d: open([P(-9, -1, 29), P(-43, -1, 32), P(-43, -1, 16), P(-9, -1, 19), P(-9, -1, 29)]), class: "nf lo" }, g);
+  mk("path", { d: open([P(-10, -1.6, 28), P(-42, -1.6, 30.5), P(-42, -1.6, 17.5), P(-10, -1.6, 20), P(-10, -1.6, 28)]), class: "nf lo" }, g);
+  // Machined sprocket teeth, chainring arms and a paired chain run show how
+  // the pedal spindle actually transfers force to the rear hub.
+  for (const [x, z, r, n] of [[-2, 24, 9, 16], [-52, 24, 8, 14]]) {
+    for (let i = 0; i < n; i++) {
+      const a = i * Math.PI * 2 / n, b = (i + .5) * Math.PI * 2 / n;
+      mk("path", { d: open([P(x + Math.cos(a) * r, -1.2, z + Math.sin(a) * r), P(x + Math.cos(b) * (r + 1.1), -1.2, z + Math.sin(b) * (r + 1.1))]), class: "nf lo" }, g);
+    }
+  }
+  mk("path", { d: open([P(-9, -2, 32), P(-42, -2, 33.5)]), class: "sil" }, g);
+  mk("path", { d: open([P(-9, -2, 16), P(-42, -2, 14.5)]), class: "sil" }, g);
+  for (const [x, z, r] of [[-2, 24, 3], [-52, 24, 2.5], [51, 24, 3]]) {
+    mk("path", { d: open(circ(r, 24).map((q) => P(x + q.u, -2, z + q.v))), class: "nf lo" }, g);
+    mk("path", { d: open([P(x - r * .6, -2.2, z), P(x + r * .6, -2.2, z)]), class: "nf lo" }, g);
+  }
+  // Twin brake calipers and curved mudguards follow the tire without hiding it.
+  mk("path", { d: open([P(-60, -1, 43), P(-58, -1, 50), P(-52, -1, 55), P(-45, -1, 53)]), class: "nf lo" }, g);
+  mk("path", { d: open([P(43, -1, 46), P(47, -1, 52), P(53, -1, 55), P(59, -1, 51)]), class: "nf lo" }, g);
+  mk("path", { d: open([P(-59, -1, 45), P(-56, -1, 49), P(-52, -1, 51), P(-48, -1, 50)]), class: "nf lo" }, g);
+  mk("path", { d: open([P(45, -1, 47), P(49, -1, 50), P(53, -1, 51), P(57, -1, 49)]), class: "nf lo" }, g);
+  mk("path", { d: open([P(39, -1, 55), P(48, -1, 50), P(53, -1, 28)]), class: "nf dash" }, g);
   mk("path", { d: open([P(-18, -1, 27), P(-18, -1, 20)]), class: "nf dash" }, g);
   const pedal = mk("path", { d: open([P(-13, 0, 18), P(-24, 0, 18), P(-26, 0, 20), P(-22, 0, 20)]), class: "nf sil" }, g);
   const fork = mk("path", { class: "nf lo" }, g), front = mk("path", { class: "nf hi" }, g), inner = mk("path", { class: "nf lo" }, g);

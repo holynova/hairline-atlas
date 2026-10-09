@@ -1,24 +1,26 @@
 # Hairline Atlas · 线感物集
 
-A growing collection of nine pointer-responsive line drawings: everyday objects, vehicles, and website structures. Each figure is a portable standalone HTML page built with the Hairline Create skill and its fixed drawing engine.
+A collection of fifty pointer-responsive Hairline drawings: ten each across everyday objects, transport, digital systems, world masterpieces, and mechanical principles. Every entry is a standalone HTML figure, and the gallery groups them into five chapters.
 
 ## Run locally
 
-Open `dist/index.html`, or serve `dist/` with a static file server, for example:
+Open `dist/index.html`, or serve `dist/` with a static file server:
 
 ```sh
 python3 -m http.server 8080 --directory dist
 ```
 
-## Edit and rebuild the figures
+## Edit and rebuild
 
-Figure sources live in `src/figures/`. The project includes the `hairline-create` skill under `.agents/skills/hairline-create`. Follow its concept, build, validation, and visual-check steps. Then rebuild every standalone page with:
+The collection and gallery copy live in `src/catalog.json`. The original nine figures are in `src/figures/`; the expanded scenes use the five category templates in `src/templates/`. Each template keeps the Hairline drawing engine fixed and gives every scene its own geometry and pointer-driven movement.
+
+Rebuild the fifty standalone pages and the gallery with:
 
 ```sh
 node scripts/build-figures.mjs
 ```
 
-Generated pages land in `dist/figures/`; the showcase page is `dist/index.html`.
+The script writes `dist/figures/*.html`, `dist/index.html`, and `dist/styles.css`. Figure validation and visual review use the included `hairline-create` skill under `.agents/skills/hairline-create`.
 
 ## Attribution
 

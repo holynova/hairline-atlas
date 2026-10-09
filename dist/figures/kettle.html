@@ -921,6 +921,33 @@ function mount({ stage, svg, read }, strength) {
   mk("path", { d: open(gauge.map((q) => P(q.u, 28.2, q.v))), class: "nf lo" }, g);
   mk("path", { d: [35, 39, 43].map((z, i) => seg(P(19.4, 28.4, z), P(i === 1 ? 22.7 : 23.8, 28.4, z))).join(""), class: "nf lo" }, g);
 
+  // Turned body seams, enamel flutes and rolled lower bands give the broad
+  // shell the small manufacturing details that survive at thumbnail size.
+  const frontArc = (rx, ry, z) => Array.from({ length: 25 }, (_, i) => {
+    const a = Math.PI * i / 24;
+    return P(rx * Math.cos(a), ry * Math.sin(a), z);
+  });
+  [[30, 26, 11], [32, 28, 16], [30, 26, 44], [26, 22, 49]].forEach(([rx, ry, z], i) => {
+    mk("path", { d: open(frontArc(rx, ry, z)), class: i === 1 ? "nf sil" : "nf lo" }, g);
+  });
+  for (const x of [-17, -12, -7, 0, 7, 12, 17]) {
+    const y = 25.5 - Math.abs(x) * 0.18;
+    const z0 = Math.abs(x) > 14 ? 20 : 15, z1 = Math.abs(x) > 14 ? 43 : 46;
+    mk("path", { d: open([P(x, y, z0), P(x * .96, y + 1, z0 + 6), P(x * .92, y + 1.2, z1 - 6), P(x * .9, y, z1)]), class: "nf lo" }, g);
+  }
+  for (const z of [13, 15, 47]) {
+    for (const x of [-23, -18, 18, 23]) {
+      mk("path", { d: open(circ(0.8, 14).map((q) => P(x + q.u, 25.4, z + q.v))), class: "nf lo" }, g);
+    }
+  }
+  // Rolled spout collar and a pair of seams make its taper read in profile.
+  mk("path", { d: open([P(28, 2, 40), P(34, 2, 43), P(38, 2, 47)]), class: "nf lo" }, g);
+  mk("path", { d: open([P(29, -1, 38), P(35, -1, 41), P(40, -1, 45)]), class: "nf lo" }, g);
+  for (let i = 0; i < 4; i++) {
+    const z = 17 + i * 5;
+    mk("path", { d: open([P(-55, -3, z), P(-53, -3, z + 1), P(-52, -3, z + 2)]), class: "nf lo" }, g);
+  }
+
   const lidGroup = mk("g", {}, g), lidFace = mk("path", { class: "sil hi" }, lidGroup);
   const lidCrease = mk("path", { class: "nf lo" }, lidGroup), lidRing = rrect(-19, -18, 19, 18, 7, 6);
   const lidInner = rrect(-15.5, -14.5, 15.5, 14.5, 5, 6);

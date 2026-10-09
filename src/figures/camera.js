@@ -37,6 +37,28 @@ function mount({ stage, svg, read }, range) {
     mk("path", { d: open(circ(3.1, 18).map((q) => P(x, q.u * 0.72, 45 + q.v))), class: "nf lo" }, g);
   });
 
+  // A recessed front plate, service seams, fasteners and grip ribs break up
+  // the camera's large casting without putting labels on the object.
+  const plate = rrect(-33, 12, 33, 50, 5, 6);
+  mk("path", { d: open(plate.map((q) => P(q.u, 25.6, q.v))), class: "nf lo" }, g);
+  mk("path", { d: open(rrect(-30, 15, -27, 47, 1.3, 5).map((q) => P(q.u, 25.8, q.v))), class: "nf sil" }, g);
+  mk("path", { d: open(rrect(27, 14, 31, 48, 1.5, 5).map((q) => P(q.u, 25.8, q.v))), class: "nf lo" }, g);
+  for (const [x, z] of [[-32, 13], [32, 13], [-32, 49], [32, 49]]) {
+    mk("path", { d: open(circle(P, x, 25.9, z, 1.4)), class: "nf lo" }, g);
+    mk("path", { d: open([P(x - .75, 26, z), P(x + .75, 26, z)]), class: "nf lo" }, g);
+  }
+  for (let i = 0; i < 8; i++) {
+    const z = 20 + i * 2.7;
+    mk("path", { d: open([P(-35, 26, z), P(-30, 26, z + .5)]), class: "nf lo" }, g);
+  }
+  // The far-side battery door and a hinge row make the molded rear shell read
+  // as a serviced instrument, not a blank rounded block.
+  mk("path", { d: open(rrect(-22, 13, 9, 46, 3, 6).map((q) => P(q.u, -24.4, q.v))), class: "nf lo" }, g);
+  for (let i = 0; i < 5; i++) {
+    const z = 19 + i * 5.2;
+    mk("path", { d: open([P(11, -24.6, z), P(15, -24.6, z)]), class: "nf lo" }, g);
+  }
+
   const lens = mk("g", {}, g), rim = mk("path", { class: "nf lo" }, lens);
   const barrel = mk("path", { class: "nf sil" }, lens), outer = mk("path", { class: "nf hi" }, lens);
   const inner = mk("path", { class: "nf lo" }, lens), glass = mk("path", { class: "nf lo" }, lens);
