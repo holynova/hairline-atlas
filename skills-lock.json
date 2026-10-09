@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "hairline-create": {
+      "source": "../../../../tmp/hairline-repo/hairline-main",
+      "sourceType": "local",
+      "computedHash": "836906905802fe12e344719545b8ff4d99e3741af044454309b1f8dfe793a948"
+    }
+  }
+}
