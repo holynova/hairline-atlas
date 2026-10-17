@@ -8,7 +8,7 @@ English: Fifty pointer-responsive line drawings across everyday objects, transpo
 
 ## 在线体验 / Live Demo
 
-- [Cloudflare Demo](https://hairline-atlas.xiaosang.cc/)（HTTPS 与页面验证进行中）
+- [Cloudflare Demo](https://xiaosang.cc/hairline-atlas/)
 - [GitHub Repo](https://github.com/holynova/hairline-atlas)
 
 <img src="./assets/qr.png" width="180" alt="QR code for the Hairline Atlas Cloudflare demo">
@@ -30,6 +30,6 @@ npm run deploy:check
 npm run deploy
 ```
 
-Cloudflare Worker: `hairline-atlas` · Custom Domain: `hairline-atlas.xiaosang.cc`.
+Cloudflare Worker: `hairline-atlas` · Domain: `xiaosang.cc` · Route: `/hairline-atlas/`.
 
 The Hairline figure engine and method are by Lucas Marques, used under the included MIT license. See [the Hairline skill](https://hairline.lucasmarkes.com/skill) and [upstream source](https://github.com/lucasmarkes/hairline).
