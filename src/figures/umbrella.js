@@ -62,7 +62,7 @@ function mount({ stage, svg, read }, lift) {
       const target = i < 0 ? a.base : a.base + Math.max(0, lift - distance * 3.5);
       tset(a.tw, target, now, distance * 38);
     });
-    read.textContent = i < 0 ? "rest" : `rib ${String(i + 1).padStart(2, "0")}`;
+    read.textContent = i < 0 ? "静止" : `伞骨 ${String(i + 1).padStart(2, "0")}`;
     B.wake();
   }
   bag.add(pointer(stage, { move: selectFrom, leave: () => select(-1) }));
@@ -73,7 +73,7 @@ function mount({ stage, svg, read }, lift) {
 
 hairline({
   name: "umbrella",
-  means: "Seven umbrella ribs flex away from the one the pointer brushes.",
+  means: "伞骨向触碰的一侧弯开。",
   rules: [1, 2, 3, 4, 8, 9],
   range: [6, 11, 17],
   tour: [[238, 144], [172, 144], [203, 192], null],

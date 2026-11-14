@@ -58,7 +58,7 @@ function mount({ stage, svg, read }, travel) {
       const target = item.page === i && i >= 0 ? travel : item.depth === 1 && i >= 0 && item.parent === items[3 + i].parent ? travel * 0.64 : item.depth === 0 && i >= 0 ? travel * 0.34 : sibling ? travel * 0.22 : item.rest;
       tset(item.pull, target, now, item.depth * 75);
     });
-    read.textContent = i < 0 ? "rest" : `page ${Math.floor(i / 2) + 1}·${(i % 2) + 1}`;
+    read.textContent = i < 0 ? "静止" : `页面 ${Math.floor(i / 2) + 1}-${(i % 2) + 1}`;
     B.wake();
   }
   bag.add(pointer(stage, { move: (p) => select(choose(p)), leave: () => select(-1) }));
@@ -68,7 +68,7 @@ function mount({ stage, svg, read }, travel) {
 
 hairline({
   name: "sitemap",
-  means: "A card catalogue opens a page and then the drawers that contain it.",
+  means: "页面选中后逐层展开。",
   rules: [1, 3, 4, 6, 8, 9, 10],
   range: [28, 58, 68],
   tour: [[155, 213], [235, 207], [282, 215], null],

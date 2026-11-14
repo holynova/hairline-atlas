@@ -1,16 +1,17 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hairline figure</title>
+<title>互动线稿｜线感物集</title>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="e01c9f78-4607-4e60-b01c-77c8190b12b4"></script>
 <link rel="icon" href="data:,">
 <style>
-  :root { color-scheme: light; --ground: #ffffff; --ink: #232327; --muted: #6f6f78; --line: #e0e0e4; }
+  :root { color-scheme: light; --ground: #ffffff; --ink: #26221e; --muted: #78716a; --line: #e3e0d8; }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) { color-scheme: dark; --ground: #08090a; --ink: #d0d6e0; --muted: #8a8c95; --line: #29292d; }
+    :root:not([data-theme="light"]) { color-scheme: dark; --ground: #0b0a09; --ink: #d8d2c8; --muted: #948c82; --line: #2c2824; }
   }
-  :root[data-theme="dark"] { color-scheme: dark; --ground: #08090a; --ink: #d0d6e0; --muted: #8a8c95; --line: #29292d; }
+  :root[data-theme="dark"] { color-scheme: dark; --ground: #0b0a09; --ink: #d8d2c8; --muted: #948c82; --line: #2c2824; }
   :root[data-theme="light"] { color-scheme: light; }
   * { box-sizing: border-box; }
   body {
@@ -57,13 +58,13 @@
     <div id="stage"></div>
   </div>
   <div class="controls">
-    <label class="label" for="intensity">intensity</label>
+    <label class="label" for="intensity">强度</label>
     <input id="intensity" type="range" min="0" max="1" step="0.01" value="0.5">
     <output id="value" for="intensity"></output>
-    <span class="label">theme</span>
-    <button id="theme" type="button" aria-label="Switch between the light and the dark theme"></button>
-    <span class="label">play</span>
-    <button id="play" type="button" aria-pressed="false">play</button>
+    <span class="label">主题</span>
+    <button id="theme" type="button" aria-label="切换浅色或深色主题"></button>
+    <span class="label">播放</span>
+    <button id="play" type="button" aria-pressed="false">播放</button>
   </div>
   <p id="means"></p>
   <p id="rules" class="label"></p>
@@ -723,8 +724,8 @@ var HL = (() => {
   }
 
   // packages/hairline/src/core/styles.ts
-  var LIGHT = { plate: "#ffffff", hi: "#232327", edge: "#a4a4ac", mid: "#c3c3c9", lo: "#e0e0e4" };
-  var DARK = { plate: "#08090a", hi: "#d0d6e0", edge: "#5b5d64", mid: "#3e3e44", lo: "#29292d" };
+  var LIGHT = { plate: "#ffffff", hi: "#26221e", edge: "#a8a094", mid: "#c6beb0", lo: "#e3ded2" };
+  var DARK = { plate: "#0b0a09", hi: "#d8d2c8", edge: "#5e584e", mid: "#423c34", lo: "#2c2824" };
   var KEYS = ["plate", "hi", "edge", "mid", "lo"];
   var vars = (p) => KEYS.map((k) => `--hl-${k}:var(--hairline-${k},${p[k]});`).join("");
   var EASE = "cubic-bezier(0.5,0,0.1,1)";
@@ -791,13 +792,13 @@ var HL = (() => {
  * around it: the read-out, the slider, the theme, the line under the stage.
  */
 (() => {
-  const RULES = ["hit", "order", "reach", "accent", "rest", "honesty", "cost", "clock", "radius", "quiet"];
+  const RULES = ["命中", "次序", "幅度", "强调", "静止", "诚实", "开销", "时钟", "圆角", "无字"];
   const $ = (id) => document.getElementById(id);
   const root = document.documentElement, params = new URLSearchParams(location.search);
 
   /* the theme: the system's until the switch is pressed, then the switch's */
   const dark = () => (root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches);
-  const label = () => { $("theme").textContent = dark() ? "dark" : "light"; };
+  const label = () => { $("theme").textContent = dark() ? "深色" : "浅色"; };
   $("theme").addEventListener("click", () => { root.dataset.theme = dark() ? "light" : "dark"; label(); });
   /* ?theme=light or ?theme=dark wins over the system's, as pressing the switch does */
   if (["light", "dark"].includes(params.get("theme"))) root.dataset.theme = params.get("theme");
@@ -839,15 +840,15 @@ var HL = (() => {
       set textContent(value) { text = value == null ? "" : String(value); $("read").textContent = text; },
     };
 
-    document.title = "Hairline · " + figure.name;
-    $("name").textContent = figure.name;
+    document.title = (figure.label || figure.name) + "｜线感物集";
+    $("name").textContent = figure.label || figure.name;
     $("means").textContent = figure.means;
-    $("rules").textContent = figure.rules.map((n) => String(n).padStart(2, "0") + " " + RULES[n - 1]).join(" · ");
-    const show = () => { $("value").textContent = String(at(Number(slider.value))); };
+    $("rules").textContent = figure.rules.map((n) => String(n).padStart(2, "0") + " " + RULES[n - 1]).join("、");
+    const show = () => { $("value").textContent = Math.round(Number(slider.value) * 100) + "%"; };
     show();
 
     const handle = figure.mount({ stage, svg, read }, at(Number(slider.value)));
-    if (text === null) read.textContent = "rest";
+    if (text === null) read.textContent = "静止";
     slider.addEventListener("input", () => { show(); handle.set(at(Number(slider.value))); });
     window.hairline.figure = handle;
 
@@ -859,6 +860,7 @@ var HL = (() => {
       if (was) { window.hairline.playing.stop(); window.hairline.playing = null; }
       else window.hairline.playing = HL.tour(stage, figure.tour || HL.LAP, (i) => { if (window.hairline.onStop) window.hairline.onStop(i); });
       play.setAttribute("aria-pressed", String(!was));
+      play.textContent = was ? "播放" : "停止";
     });
     if (params.get("play") === "1") play.click();
 
@@ -898,7 +900,7 @@ function mount({ stage, svg, read }, maxTurn) {
   mk("path", { d: open(wheel(P, A[0], 1.2, A[2], 8)), class: "nf lo" }, g);
   mk("path", { d: open(circ(3.2, 20).map((q) => P(A[0] + q.u, A[1] + 1.4, A[2] + q.v))), class: "nf sil" }, g);
   mk("path", { d: open([P(A[0], A[1] - 1.6, A[2]), P(A[0], A[1] + 1.6, A[2])]), class: "nf lo" }, g);
-  const frame = mk("path", { class: "nf sil" }, g);
+  const frame = mk("path", { class: "sil" }, g);
   frame.setAttribute("d", open([P(...A), P(...seat), P(...crank), P(...A), P(...head), P(...seat), P(...head), P(...B)]));
   mk("path", { d: open([P(A[0], 1.1, A[2]), P(seat[0], 1.1, seat[2]), P(crank[0], 1.1, crank[2]), P(A[0], 1.1, A[2]), P(head[0], 1.1, head[2]), P(seat[0], 1.1, seat[2]), P(head[0], 1.1, head[2]), P(B[0], 1.1, B[2])]), class: "nf lo" }, g);
   mk("path", { d: open([P(...seat), P(-21, 0, 58), P(-33, 0, 59), P(-39, 0, 57), P(-28, 0, 55), P(...seat)]), class: "nf hi" }, g);
@@ -911,6 +913,27 @@ function mount({ stage, svg, read }, maxTurn) {
   mk("path", { d: open(circ(7.2, 28).map((q) => P(crank[0] + q.u, -1, crank[2] + q.v))), class: "nf lo" }, g);
   mk("path", { d: open(circ(6.2, 28).map((q) => P(A[0] + q.u, -1, A[2] + q.v))), class: "nf lo" }, g);
   mk("path", { d: open([P(-9, -1, 29), P(-43, -1, 32), P(-43, -1, 16), P(-9, -1, 19), P(-9, -1, 29)]), class: "nf lo" }, g);
+  mk("path", { d: open([P(-10, -1.6, 28), P(-42, -1.6, 30.5), P(-42, -1.6, 17.5), P(-10, -1.6, 20), P(-10, -1.6, 28)]), class: "nf lo" }, g);
+  // Machined sprocket teeth, chainring arms and a paired chain run show how
+  // the pedal spindle actually transfers force to the rear hub.
+  for (const [x, z, r, n] of [[-2, 24, 9, 16], [-52, 24, 8, 14]]) {
+    for (let i = 0; i < n; i++) {
+      const a = i * Math.PI * 2 / n, b = (i + .5) * Math.PI * 2 / n;
+      mk("path", { d: open([P(x + Math.cos(a) * r, -1.2, z + Math.sin(a) * r), P(x + Math.cos(b) * (r + 1.1), -1.2, z + Math.sin(b) * (r + 1.1))]), class: "nf lo" }, g);
+    }
+  }
+  mk("path", { d: open([P(-9, -2, 32), P(-42, -2, 33.5)]), class: "sil" }, g);
+  mk("path", { d: open([P(-9, -2, 16), P(-42, -2, 14.5)]), class: "sil" }, g);
+  for (const [x, z, r] of [[-2, 24, 3], [-52, 24, 2.5], [51, 24, 3]]) {
+    mk("path", { d: open(circ(r, 24).map((q) => P(x + q.u, -2, z + q.v))), class: "nf lo" }, g);
+    mk("path", { d: open([P(x - r * .6, -2.2, z), P(x + r * .6, -2.2, z)]), class: "nf lo" }, g);
+  }
+  // Twin brake calipers and curved mudguards follow the tire without hiding it.
+  mk("path", { d: open([P(-60, -1, 43), P(-58, -1, 50), P(-52, -1, 55), P(-45, -1, 53)]), class: "nf lo" }, g);
+  mk("path", { d: open([P(43, -1, 46), P(47, -1, 52), P(53, -1, 55), P(59, -1, 51)]), class: "nf lo" }, g);
+  mk("path", { d: open([P(-59, -1, 45), P(-56, -1, 49), P(-52, -1, 51), P(-48, -1, 50)]), class: "nf lo" }, g);
+  mk("path", { d: open([P(45, -1, 47), P(49, -1, 50), P(53, -1, 51), P(57, -1, 49)]), class: "nf lo" }, g);
+  mk("path", { d: open([P(39, -1, 55), P(48, -1, 50), P(53, -1, 28)]), class: "nf dash" }, g);
   mk("path", { d: open([P(-18, -1, 27), P(-18, -1, 20)]), class: "nf dash" }, g);
   const pedal = mk("path", { d: open([P(-13, 0, 18), P(-24, 0, 18), P(-26, 0, 20), P(-22, 0, 20)]), class: "nf sil" }, g);
   const fork = mk("path", { class: "nf lo" }, g), front = mk("path", { class: "nf hi" }, g), inner = mk("path", { class: "nf lo" }, g);
@@ -932,15 +955,15 @@ function mount({ stage, svg, read }, maxTurn) {
   const Bloop = register(stage, (dt) => { const moving = stepS(steer, dt); if (moving) drawFront(); return moving; });
   bag.add(Bloop.unregister);
   let lastX = 200;
-  function aim(x) { lastX = x; steer.t = rad(clamp((x - 200) / 118, -1, 1) * maxTurn); read.textContent = "steer"; Bloop.wake(); }
-  bag.add(pointer(stage, { move: ([x]) => aim(x), leave: () => { steer.t = rad(0); read.textContent = "rest"; Bloop.wake(); } }));
+  function aim(x) { lastX = x; steer.t = rad(clamp((x - 200) / 118, -1, 1) * maxTurn); read.textContent = "转向"; Bloop.wake(); }
+  bag.add(pointer(stage, { move: ([x]) => aim(x), leave: () => { steer.t = rad(0); read.textContent = "静止"; Bloop.wake(); } }));
   bag.add(() => svg.replaceChildren());
-  return { set: (v) => { maxTurn = v; if (read.textContent === "steer") aim(lastX); }, destroy: bag.dispose };
+  return { set: (v) => { maxTurn = v; if (read.textContent === "转向") aim(lastX); }, destroy: bag.dispose };
 }
 
 hairline({
-  name: "bicycle",
-  means: "The bicycle's front wheel turns with the pointer while its frame holds steady.",
+  name: "bicycle",label:"自行车",
+  means: "前轮随手转向。",
   rules: [1, 3, 4, 8, 9],
   range: [8, 22, 34],
   tour: [[116, 160], [200, 135], [286, 160], null],

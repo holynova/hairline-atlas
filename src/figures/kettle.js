@@ -100,9 +100,9 @@ function mount({ stage, svg, read }, strength) {
     move: ([x, y]) => {
       pointerY = y;
       angle.t = rad(8 + clamp((190 - y) / 108, 0, 1) * strength);
-      read.textContent = "lid"; B.wake();
+      read.textContent = "壶盖"; B.wake();
     },
-    leave: () => { pointerY = null; angle.t = rad(8); read.textContent = "rest"; B.wake(); },
+    leave: () => { pointerY = null; angle.t = rad(8); read.textContent = "静止"; B.wake(); },
   }));
   bag.add(() => svg.replaceChildren());
   return { set: (v) => { strength = v; if (pointerY !== null) { angle.t = rad(8 + clamp((190 - pointerY) / 108, 0, 1) * strength); B.wake(); } }, destroy: bag.dispose };
@@ -110,7 +110,7 @@ function mount({ stage, svg, read }, strength) {
 
 hairline({
   name: "kettle",
-  means: "A kettle lid lifts as the pointer rises, then settles back onto the rim.",
+  means: "壶盖随手旋开。",
   rules: [1, 3, 4, 8, 9],
   range: [30, 50, 66],
   tour: [[200, 147], [200, 96], [240, 116], null],

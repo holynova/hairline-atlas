@@ -1,17 +1,17 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hairline figure</title>
+<title>互动线稿｜线感物集</title>
 <script defer src="https://cloud.umami.is/script.js" data-website-id="e01c9f78-4607-4e60-b01c-77c8190b12b4"></script>
 <link rel="icon" href="data:,">
 <style>
-  :root { color-scheme: light; --ground: #ffffff; --ink: #232327; --muted: #6f6f78; --line: #e0e0e4; }
+  :root { color-scheme: light; --ground: #ffffff; --ink: #26221e; --muted: #78716a; --line: #e3e0d8; }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) { color-scheme: dark; --ground: #08090a; --ink: #d0d6e0; --muted: #8a8c95; --line: #29292d; }
+    :root:not([data-theme="light"]) { color-scheme: dark; --ground: #0b0a09; --ink: #d8d2c8; --muted: #948c82; --line: #2c2824; }
   }
-  :root[data-theme="dark"] { color-scheme: dark; --ground: #08090a; --ink: #d0d6e0; --muted: #8a8c95; --line: #29292d; }
+  :root[data-theme="dark"] { color-scheme: dark; --ground: #0b0a09; --ink: #d8d2c8; --muted: #948c82; --line: #2c2824; }
   :root[data-theme="light"] { color-scheme: light; }
   * { box-sizing: border-box; }
   body {
@@ -58,13 +58,13 @@
     <div id="stage"></div>
   </div>
   <div class="controls">
-    <label class="label" for="intensity">intensity</label>
+    <label class="label" for="intensity">强度</label>
     <input id="intensity" type="range" min="0" max="1" step="0.01" value="0.5">
     <output id="value" for="intensity"></output>
-    <span class="label">theme</span>
-    <button id="theme" type="button" aria-label="Switch between the light and the dark theme"></button>
-    <span class="label">play</span>
-    <button id="play" type="button" aria-pressed="false">play</button>
+    <span class="label">主题</span>
+    <button id="theme" type="button" aria-label="切换浅色或深色主题"></button>
+    <span class="label">播放</span>
+    <button id="play" type="button" aria-pressed="false">播放</button>
   </div>
   <p id="means"></p>
   <p id="rules" class="label"></p>
@@ -78,13 +78,13 @@
  * around it: the read-out, the slider, the theme, the line under the stage.
  */
 (() => {
-  const RULES = ["hit", "order", "reach", "accent", "rest", "honesty", "cost", "clock", "radius", "quiet"];
+  const RULES = ["命中", "次序", "幅度", "强调", "静止", "诚实", "开销", "时钟", "圆角", "无字"];
   const $ = (id) => document.getElementById(id);
   const root = document.documentElement, params = new URLSearchParams(location.search);
 
   /* the theme: the system's until the switch is pressed, then the switch's */
   const dark = () => (root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches);
-  const label = () => { $("theme").textContent = dark() ? "dark" : "light"; };
+  const label = () => { $("theme").textContent = dark() ? "深色" : "浅色"; };
   $("theme").addEventListener("click", () => { root.dataset.theme = dark() ? "light" : "dark"; label(); });
   /* ?theme=light or ?theme=dark wins over the system's, as pressing the switch does */
   if (["light", "dark"].includes(params.get("theme"))) root.dataset.theme = params.get("theme");
@@ -126,15 +126,15 @@
       set textContent(value) { text = value == null ? "" : String(value); $("read").textContent = text; },
     };
 
-    document.title = "Hairline · " + figure.name;
-    $("name").textContent = figure.name;
+    document.title = (figure.label || figure.name) + "｜线感物集";
+    $("name").textContent = figure.label || figure.name;
     $("means").textContent = figure.means;
-    $("rules").textContent = figure.rules.map((n) => String(n).padStart(2, "0") + " " + RULES[n - 1]).join(" · ");
-    const show = () => { $("value").textContent = String(at(Number(slider.value))); };
+    $("rules").textContent = figure.rules.map((n) => String(n).padStart(2, "0") + " " + RULES[n - 1]).join("、");
+    const show = () => { $("value").textContent = Math.round(Number(slider.value) * 100) + "%"; };
     show();
 
     const handle = figure.mount({ stage, svg, read }, at(Number(slider.value)));
-    if (text === null) read.textContent = "rest";
+    if (text === null) read.textContent = "静止";
     slider.addEventListener("input", () => { show(); handle.set(at(Number(slider.value))); });
     window.hairline.figure = handle;
 
@@ -146,6 +146,7 @@
       if (was) { window.hairline.playing.stop(); window.hairline.playing = null; }
       else window.hairline.playing = HL.tour(stage, figure.tour || HL.LAP, (i) => { if (window.hairline.onStop) window.hairline.onStop(i); });
       play.setAttribute("aria-pressed", String(!was));
+      play.textContent = was ? "播放" : "停止";
     });
     if (params.get("play") === "1") play.click();
 

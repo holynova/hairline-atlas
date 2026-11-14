@@ -86,15 +86,15 @@ function mount({ stage, svg, read }, range) {
   const B = register(stage, (dt) => { const moving = stepS(focus, dt); if (moving) drawLens(); return moving; });
   bag.add(B.unregister);
   let lastX = 200;
-  function aim(x) { lastX = x; focus.t = 3 + clamp((x - 95) / 210, 0, 1) * range; read.textContent = "focus"; B.wake(); }
-  bag.add(pointer(stage, { move: ([x]) => aim(x), leave: () => { read.textContent = "rest"; focus.t = 8; B.wake(); } }));
+  function aim(x) { lastX = x; focus.t = 3 + clamp((x - 95) / 210, 0, 1) * range; read.textContent = "对焦"; B.wake(); }
+  bag.add(pointer(stage, { move: ([x]) => aim(x), leave: () => { read.textContent = "静止"; focus.t = 8; B.wake(); } }));
   bag.add(() => svg.replaceChildren());
-  return { set: (v) => { range = v; if (read.textContent === "focus") aim(lastX); }, destroy: bag.dispose };
+  return { set: (v) => { range = v; if (read.textContent === "对焦") aim(lastX); }, destroy: bag.dispose };
 }
 
 hairline({
   name: "camera",
-  means: "The camera lens travels forward as the pointer moves across its body.",
+  means: "镜筒随手势伸缩。",
   rules: [1, 3, 4, 8, 9],
   range: [8, 20, 28],
   tour: [[110, 166], [200, 144], [300, 166], null],

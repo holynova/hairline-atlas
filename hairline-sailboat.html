@@ -1,16 +1,17 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hairline figure</title>
+<title>互动线稿｜线感物集</title>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="e01c9f78-4607-4e60-b01c-77c8190b12b4"></script>
 <link rel="icon" href="data:,">
 <style>
-  :root { color-scheme: light; --ground: #ffffff; --ink: #232327; --muted: #6f6f78; --line: #e0e0e4; }
+  :root { color-scheme: light; --ground: #ffffff; --ink: #26221e; --muted: #78716a; --line: #e3e0d8; }
   @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) { color-scheme: dark; --ground: #08090a; --ink: #d0d6e0; --muted: #8a8c95; --line: #29292d; }
+    :root:not([data-theme="light"]) { color-scheme: dark; --ground: #0b0a09; --ink: #d8d2c8; --muted: #948c82; --line: #2c2824; }
   }
-  :root[data-theme="dark"] { color-scheme: dark; --ground: #08090a; --ink: #d0d6e0; --muted: #8a8c95; --line: #29292d; }
+  :root[data-theme="dark"] { color-scheme: dark; --ground: #0b0a09; --ink: #d8d2c8; --muted: #948c82; --line: #2c2824; }
   :root[data-theme="light"] { color-scheme: light; }
   * { box-sizing: border-box; }
   body {
@@ -57,13 +58,13 @@
     <div id="stage"></div>
   </div>
   <div class="controls">
-    <label class="label" for="intensity">intensity</label>
+    <label class="label" for="intensity">强度</label>
     <input id="intensity" type="range" min="0" max="1" step="0.01" value="0.5">
     <output id="value" for="intensity"></output>
-    <span class="label">theme</span>
-    <button id="theme" type="button" aria-label="Switch between the light and the dark theme"></button>
-    <span class="label">play</span>
-    <button id="play" type="button" aria-pressed="false">play</button>
+    <span class="label">主题</span>
+    <button id="theme" type="button" aria-label="切换浅色或深色主题"></button>
+    <span class="label">播放</span>
+    <button id="play" type="button" aria-pressed="false">播放</button>
   </div>
   <p id="means"></p>
   <p id="rules" class="label"></p>
@@ -723,8 +724,8 @@ var HL = (() => {
   }
 
   // packages/hairline/src/core/styles.ts
-  var LIGHT = { plate: "#ffffff", hi: "#232327", edge: "#a4a4ac", mid: "#c3c3c9", lo: "#e0e0e4" };
-  var DARK = { plate: "#08090a", hi: "#d0d6e0", edge: "#5b5d64", mid: "#3e3e44", lo: "#29292d" };
+  var LIGHT = { plate: "#ffffff", hi: "#26221e", edge: "#a8a094", mid: "#c6beb0", lo: "#e3ded2" };
+  var DARK = { plate: "#0b0a09", hi: "#d8d2c8", edge: "#5e584e", mid: "#423c34", lo: "#2c2824" };
   var KEYS = ["plate", "hi", "edge", "mid", "lo"];
   var vars = (p) => KEYS.map((k) => `--hl-${k}:var(--hairline-${k},${p[k]});`).join("");
   var EASE = "cubic-bezier(0.5,0,0.1,1)";
@@ -791,13 +792,13 @@ var HL = (() => {
  * around it: the read-out, the slider, the theme, the line under the stage.
  */
 (() => {
-  const RULES = ["hit", "order", "reach", "accent", "rest", "honesty", "cost", "clock", "radius", "quiet"];
+  const RULES = ["命中", "次序", "幅度", "强调", "静止", "诚实", "开销", "时钟", "圆角", "无字"];
   const $ = (id) => document.getElementById(id);
   const root = document.documentElement, params = new URLSearchParams(location.search);
 
   /* the theme: the system's until the switch is pressed, then the switch's */
   const dark = () => (root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches);
-  const label = () => { $("theme").textContent = dark() ? "dark" : "light"; };
+  const label = () => { $("theme").textContent = dark() ? "深色" : "浅色"; };
   $("theme").addEventListener("click", () => { root.dataset.theme = dark() ? "light" : "dark"; label(); });
   /* ?theme=light or ?theme=dark wins over the system's, as pressing the switch does */
   if (["light", "dark"].includes(params.get("theme"))) root.dataset.theme = params.get("theme");
@@ -839,15 +840,15 @@ var HL = (() => {
       set textContent(value) { text = value == null ? "" : String(value); $("read").textContent = text; },
     };
 
-    document.title = "Hairline · " + figure.name;
-    $("name").textContent = figure.name;
+    document.title = (figure.label || figure.name) + "｜线感物集";
+    $("name").textContent = figure.label || figure.name;
     $("means").textContent = figure.means;
-    $("rules").textContent = figure.rules.map((n) => String(n).padStart(2, "0") + " " + RULES[n - 1]).join(" · ");
-    const show = () => { $("value").textContent = String(at(Number(slider.value))); };
+    $("rules").textContent = figure.rules.map((n) => String(n).padStart(2, "0") + " " + RULES[n - 1]).join("、");
+    const show = () => { $("value").textContent = Math.round(Number(slider.value) * 100) + "%"; };
     show();
 
     const handle = figure.mount({ stage, svg, read }, at(Number(slider.value)));
-    if (text === null) read.textContent = "rest";
+    if (text === null) read.textContent = "静止";
     slider.addEventListener("input", () => { show(); handle.set(at(Number(slider.value))); });
     window.hairline.figure = handle;
 
@@ -859,6 +860,7 @@ var HL = (() => {
       if (was) { window.hairline.playing.stop(); window.hairline.playing = null; }
       else window.hairline.playing = HL.tour(stage, figure.tour || HL.LAP, (i) => { if (window.hairline.onStop) window.hairline.onStop(i); });
       play.setAttribute("aria-pressed", String(!was));
+      play.textContent = was ? "播放" : "停止";
     });
     if (params.get("play") === "1") play.click();
 
@@ -889,6 +891,22 @@ function mount({ stage, svg, read }, reach) {
   mk("path", { d: open([P(-46, -13, 14), P(-34, -19, 12), P(32, -17, 10), P(48, -7, 12), P(50, 0, 12), P(48, 7, 12)]), class: "nf lo" }, g);
   const deck = fillet([[-43, -12], [-32, -19], [33, -17], [45, -7], [47, 0], [45, 7], [33, 17], [-32, 19], [-43, 12]], [3, 4, 5, 3, 2, 3, 5, 4, 3], 4);
   mk("path", { d: open(deck.map(([x, y]) => P(x, y, 16.5))), class: "nf lo" }, g);
+  // Planked deck, raised cockpit coaming, cleats and paired lifelines turn the
+  // bare hull into a working small sailboat rather than a floating wedge.
+  for (let y = -13; y <= 13; y += 6.5) {
+    mk("path", { d: open([P(-39, y, 17), P(-26, y, 17), P(-18, y + .6, 17)]), class: "nf lo" }, g);
+    mk("path", { d: open([P(27, y, 17), P(37, y, 16.8), P(43, y * .55, 16)]), class: "nf lo" }, g);
+  }
+  mk("path", { d: open([P(-28, -20, 19), P(-25, -23, 22), P(26, -23, 22), P(31, -18, 19)]), class: "nf sil" }, g);
+  mk("path", { d: open([P(-25, -21, 20), P(-22, -21, 21), P(23, -21, 21), P(27, -19, 20)]), class: "nf lo" }, g);
+  for (const y of [-24, 24]) {
+    mk("path", { d: open([P(-39, y, 17), P(-35, y, 23), P(34, y, 23), P(41, y * .7, 18)]), class: "nf sil" }, g);
+    for (let x = -33; x <= 34; x += 11) mk("path", { d: open([P(x, y, 17), P(x, y, 23)]), class: "nf lo" }, g);
+  }
+  for (const x of [-39, -30, 34, 42]) {
+    mk("path", { d: open(circ(2.1, 20).map((q) => P(x + q.u, 1, 18 + q.v))), class: "nf sil" }, g);
+    mk("path", { d: open(circ(1.1, 16).map((q) => P(x + q.u, 1.2, 18 + q.v))), class: "nf lo" }, g);
+  }
   mk("path", { d: open([P(-5, -10, 16.8), P(-1, -13, 17), P(20, -12, 17), P(26, -8, 17), P(26, 8, 17), P(20, 12, 17), P(-1, 13, 17), P(-5, 10, 16.8)]), class: "nf sil" }, g);
   mk("path", { d: open(rrect(1, -7, 12, 5, 1.6, 4).map((q) => P(q.u, -12.5, q.v + 18))), class: "nf lo" }, g);
   mk("path", { d: open(rrect(14, -5.5, 22, 3, 1.2, 4).map((q) => P(q.u, -8.5, q.v + 18))), class: "nf lo" }, g);
@@ -905,35 +923,49 @@ function mount({ stage, svg, read }, reach) {
   mk("path", { d: open([P(-13, 0, 82), P(50, 0, 18)]), class: "nf dash" }, g);
   mk("path", { d: open(circ(5.2, 28).map((q) => P(-13 + q.u, 0, 24 + q.v))), class: "nf hi" }, g);
   const sail = mk("path", { class: "sil hi" }, g), fold = mk("path", { class: "nf lo" }, g);
-  const battens = Array.from({ length: 3 }, () => mk("path", { class: "nf lo" }, g));
-  const boom = mk("path", { class: "nf lo" }, g), sheet = spring(rad(10));
-  const sailShape = [[0, 82], [0, 23], [12, 25], [28, 28], [43, 31]];
+  const battens = Array.from({ length: 5 }, () => mk("path", { class: "nf lo" }, g));
+  const seams = Array.from({ length: 4 }, () => mk("path", { class: "nf lo" }, g));
+  const jib = mk("path", { class: "nf sil" }, g), jibSeam = mk("path", { class: "nf lo" }, g);
+  const reefMarks = mk("path", { class: "nf lo" }, g), sheetLead = mk("path", { class: "nf lo" }, g);
+  const boom = mk("path", { class: "nf sil" }, g), sheet = spring(rad(10));
+  const sailShape = [[0,82],[.4,74],[.8,64],[1.2,52],[1.7,39],[2.2,24],[8,24.5],[15,25.5],[23,27],[31,29],[38,30.5],[43,31],[36,32.5],[28,33],[20,33.5],[12,33],[5,31],[0,29]];
   function sailPoint([u, z], angle) {
     return P(-13 + u * Math.cos(angle), u * Math.sin(angle), z);
   }
   function draw() {
     const a = sheet.x;
     sail.setAttribute("d", poly(sailShape.map((p) => sailPoint(p, a))));
-    fold.setAttribute("d", open([sailPoint([2, 75], a), sailPoint([4, 38], a), sailPoint([38, 32], a)]));
+    fold.setAttribute("d", open([sailPoint([1, 75], a), sailPoint([3, 57], a), sailPoint([5, 38], a), sailPoint([23, 32], a), sailPoint([38, 32], a)]));
     boom.setAttribute("d", open([P(-13, 0, 24), sailPoint([43, 31], a)]));
+    // Curved panel seams, reef ties and a smaller headsail catch the same wind.
     battens.forEach((el, i) => {
-      const z = [68, 54, 40][i], reach = [13, 25, 36][i];
-      el.setAttribute("d", open([sailPoint([1, z], a), sailPoint([reach, z + 2], a)]));
+      const z = [70, 59, 48, 38, 31][i], reach = [10, 17, 25, 34, 40][i];
+      el.setAttribute("d", open([sailPoint([1, z], a), sailPoint([reach * .5, z + 1.5], a), sailPoint([reach, z + 2], a)]));
     });
+    seams.forEach((el, i) => {
+      const u = 8 + i * 8;
+      el.setAttribute("d", open([sailPoint([u, 29 + i * .45], a), sailPoint([u + .6, 41 + i * .35], a), sailPoint([u + 1.2, 54 + i * .25], a), sailPoint([u + 1.8, 67 + i * .15], a)]));
+    });
+    const clew = sailPoint([43, 31], a), tack = P(29, 0, 20), head = sailPoint([0, 82], a);
+    jib.setAttribute("d", poly([head, P(-4, 0, 26), tack, P(28, 0, 24), P(-2, 0, 28)]));
+    jibSeam.setAttribute("d", open([P(-3, 0, 28), P(4, 0, 27), P(13, 0, 25), P(22, 0, 23)]));
+    const ties=[];for(let k=0;k<5;k++){const z=35+k*7,u=2+k*1.4;ties.push(open([sailPoint([u-.6,z],a),sailPoint([u+.6,z],a)]));}
+    reefMarks.setAttribute("d",ties.join(""));
+    sheetLead.setAttribute("d", open([clew, P(27, -2, 19), P(21, -2, 17)]));
   }
   draw();
   const B = register(stage, (dt) => { const moving = stepS(sheet, dt); if (moving) draw(); return moving; });
   bag.add(B.unregister);
   let lastX = 200;
-  function aim(x) { lastX = x; sheet.t = rad(clamp((x - 200) / 125, -1, 1) * reach); read.textContent = "sheet"; B.wake(); }
-  bag.add(pointer(stage, { move: ([x]) => aim(x), leave: () => { sheet.t = rad(10); read.textContent = "rest"; B.wake(); } }));
+  function aim(x) { lastX = x; sheet.t = rad(clamp((x - 200) / 125, -1, 1) * reach); read.textContent = "帆索"; B.wake(); }
+  bag.add(pointer(stage, { move: ([x]) => aim(x), leave: () => { sheet.t = rad(10); read.textContent = "静止"; B.wake(); } }));
   bag.add(() => svg.replaceChildren());
-  return { set: (v) => { reach = v; if (read.textContent === "sheet") aim(lastX); }, destroy: bag.dispose };
+  return { set: (v) => { reach = v; if (read.textContent === "帆索") aim(lastX); }, destroy: bag.dispose };
 }
 
 hairline({
-  name: "sailboat",
-  means: "A sail swings around its mast to catch the direction of the pointer.",
+  name: "sailboat",label:"帆船",
+  means: "主帆随风向绕桅杆摆动。",
   rules: [1, 3, 4, 8, 9],
   range: [16, 36, 48],
   tour: [[126, 162], [206, 137], [280, 158], null],

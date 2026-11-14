@@ -75,7 +75,7 @@ function mount({ stage, svg, read }, travel) {
       const distance = Math.abs(k - from), target = i < 0 ? REST[k] : REST[k] + Math.max(0, travel - distance * 5);
       tset(car.lift, target, now, distance * 42);
     });
-    read.textContent = i < 0 ? "rest" : `car ${String(i + 1).padStart(2, "0")}`;
+    read.textContent = i < 0 ? "静止" : `车厢 ${String(i + 1).padStart(2, "0")}`;
     B.wake();
   }
   bag.add(pointer(stage, { move: (p) => select(choose(p)), leave: () => select(-1) }));
@@ -85,7 +85,7 @@ function mount({ stage, svg, read }, travel) {
 
 hairline({
   name: "tram",
-  means: "Three connected tram cars rise from the track in the order the pointer reaches them.",
+  means: "三节车厢依次抬起。",
   rules: [1, 2, 3, 4, 8, 9],
   range: [7, 14, 22],
   tour: [[136, 167], [200, 138], [266, 167], null],

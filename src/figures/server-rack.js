@@ -62,7 +62,7 @@ function mount({ stage, svg, read }, travel) {
       const distance = Math.abs(k - from), target = i < 0 ? bay.rest : bay.rest + Math.max(0, travel - distance * 4);
       tset(bay.pull, target, now, distance * 44);
     });
-    read.textContent = i < 0 ? "rest" : `bay ${String(i + 1).padStart(2, "0")}`;
+    read.textContent = i < 0 ? "静止" : `托盘 ${String(i + 1).padStart(2, "0")}`;
     B.wake();
   }
   bag.add(pointer(stage, { move: (p) => select(choose(p)), leave: () => select(-1) }));
@@ -72,7 +72,7 @@ function mount({ stage, svg, read }, travel) {
 
 hairline({
   name: "server-rack",
-  means: "The server bay under the pointer slides forward; nearby bays follow a little later.",
+  means: "被触碰的托盘抽出。",
   rules: [1, 2, 3, 4, 6, 8, 9],
   range: [6, 14, 24],
   tour: [[203, 104], [204, 166], [204, 227], null],

@@ -76,15 +76,15 @@ function mount({ stage, svg, read }, maxTurn) {
   const Bloop = register(stage, (dt) => { const moving = stepS(steer, dt); if (moving) drawFront(); return moving; });
   bag.add(Bloop.unregister);
   let lastX = 200;
-  function aim(x) { lastX = x; steer.t = rad(clamp((x - 200) / 118, -1, 1) * maxTurn); read.textContent = "steer"; Bloop.wake(); }
-  bag.add(pointer(stage, { move: ([x]) => aim(x), leave: () => { steer.t = rad(0); read.textContent = "rest"; Bloop.wake(); } }));
+  function aim(x) { lastX = x; steer.t = rad(clamp((x - 200) / 118, -1, 1) * maxTurn); read.textContent = "转向"; Bloop.wake(); }
+  bag.add(pointer(stage, { move: ([x]) => aim(x), leave: () => { steer.t = rad(0); read.textContent = "静止"; Bloop.wake(); } }));
   bag.add(() => svg.replaceChildren());
-  return { set: (v) => { maxTurn = v; if (read.textContent === "steer") aim(lastX); }, destroy: bag.dispose };
+  return { set: (v) => { maxTurn = v; if (read.textContent === "转向") aim(lastX); }, destroy: bag.dispose };
 }
 
 hairline({
   name: "bicycle",
-  means: "The bicycle's front wheel turns with the pointer while its frame holds steady.",
+  means: "前轮随手转向。",
   rules: [1, 3, 4, 8, 9],
   range: [8, 22, 34],
   tour: [[116, 160], [200, 135], [286, 160], null],

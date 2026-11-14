@@ -1,21 +1,21 @@
 {
-  "title": "Hairline Atlas · 线感物集",
+  "title": "Hairline Atlas 线感物集",
   "description": "五组可以触摸的线稿：日常物件、交通工具、网站结构、世界名画与机械原理。",
   "groups": [
     {
       "id": "objects",
       "title": "日常物件",
-      "english": "OBJECTS · 01",
+      "english": "OBJECTS / 01",
       "note": "从手边的熟悉物件开始。\n一处结构，带出一次动作。",
       "figures": [
-        { "id": "kettle", "title": "水壶", "source": "kettle.js", "action": "壶盖随指针旋开", "note": "厨房里最轻的一次动作：盖沿铰轴升起，壶身仍然稳稳停住。" },
+        { "id": "kettle", "title": "水壶", "source": "kettle.js", "action": "壶盖随手旋开", "note": "厨房里最轻的一次动作：盖沿铰轴升起，壶身仍然稳稳停住。" },
         { "id": "umbrella", "title": "折伞", "source": "umbrella.js", "action": "伞骨向触碰的一侧弯开", "note": "伞面分成七片，受力从一根伞骨向相邻骨架传过去。" },
         { "id": "camera", "title": "相机", "source": "camera.js", "action": "镜筒随手势伸缩", "note": "拨盘、热靴、握柄与多层镜筒，把拍摄工具拆成可读的结构。" },
-        { "id": "articulated-lamp", "title": "关节台灯", "template": "objects", "kind": "lamp", "action": "灯臂随指针折叠", "note": "双节弹簧臂绕过两个铰点，把灯罩准确送向桌面。" },
+        { "id": "articulated-lamp", "title": "关节台灯", "template": "objects", "kind": "lamp", "action": "灯臂随手折叠", "note": "双节弹簧臂绕过两个铰点，把灯罩准确送向桌面。" },
         { "id": "moka-pot", "title": "摩卡壶", "template": "objects", "kind": "moka", "action": "上壶沿螺纹升起", "note": "壶身、滤篮、密封圈和上壶分层，旋转把压力结构露出来。" },
         { "id": "twin-bell-clock", "title": "双铃闹钟", "template": "objects", "kind": "clock", "action": "锤头在两只铃间摆动", "note": "钟面、双铃、锤杆和脚座组成一台紧凑的机械钟。" },
         { "id": "turntable", "title": "唱片机", "template": "objects", "kind": "turntable", "action": "唱针沿沟槽缓缓内移", "note": "转盘保持同心，唱臂绕轴转入唱片内圈。" },
-        { "id": "tailor-scissors", "title": "裁缝剪", "template": "objects", "kind": "scissors", "action": "两片刀刃随指针张合", "note": "偏置枢轴、刃口磨面与不对称手柄都保留在剪刀上。" },
+        { "id": "tailor-scissors", "title": "裁缝剪", "template": "objects", "kind": "scissors", "action": "两片刀刃随手张合", "note": "偏置枢轴、刃口磨面与不对称手柄都保留在剪刀上。" },
         { "id": "sewing-machine", "title": "缝纫机", "template": "objects", "kind": "sewing", "action": "针杆与压脚同步下行", "note": "线轴、张力盘、飞轮和针杆连成一台桌面缝纫机。" },
         { "id": "wristwatch", "title": "机械腕表", "template": "objects", "kind": "watch", "action": "表冠带动指针走时", "note": "分层表圈、表冠、表盘刻度与腕带接头围绕一个表芯。" }
       ]
@@ -23,14 +23,14 @@
     {
       "id": "transport",
       "title": "交通工具",
-      "english": "MOVEMENT · 02",
+      "english": "MOVEMENT / 02",
       "note": "方向、动力与承重。\n从一个部件读出整台机器。",
       "figures": [
-        { "id": "bicycle", "title": "自行车", "source": "bicycle.js", "action": "前轮跟着指针转向", "note": "辐条、车架、链条与飞轮一起勾出一辆完整的自行车。" },
+        { "id": "bicycle", "title": "自行车", "source": "bicycle.js", "action": "前轮随手转向", "note": "辐条、车架、链条与飞轮一起勾出一辆完整的自行车。" },
         { "id": "tram", "title": "有轨电车", "source": "tram.js", "action": "三节车厢依次抬起", "note": "车顶受电弓、车门、转向架和轨枕组成一段线路。" },
         { "id": "sailboat", "title": "帆船", "source": "sailboat.js", "action": "主帆随风向绕桅杆摆动", "note": "船壳、舱盖、龙骨与张紧的索具托住一面转向的帆。" },
         { "id": "steam-locomotive", "title": "蒸汽机车", "template": "transport", "kind": "locomotive", "action": "连杆带动驱动轮转动", "note": "锅炉、烟囱、驾驶室和外露的曲柄连杆都沿着钢轨排列。" },
-        { "id": "helicopter", "title": "直升机", "template": "transport", "kind": "helicopter", "action": "主旋翼随指针偏转", "note": "机身、尾梁、尾桨、起落橇与四片主旋翼互相配重。" },
+        { "id": "helicopter", "title": "直升机", "template": "transport", "kind": "helicopter", "action": "主旋翼随手偏转", "note": "机身、尾梁、尾桨、起落橇与四片主旋翼互相配重。" },
         { "id": "biplane", "title": "双翼机", "template": "transport", "kind": "biplane", "action": "螺旋桨沿轴线旋转", "note": "上下机翼、翼间支柱、座舱和起落轮构成早期双翼机。" },
         { "id": "hot-air-balloon", "title": "热气球", "template": "transport", "kind": "balloon", "action": "吊篮随浮力缓缓上升", "note": "分片球囊、吊绳、燃烧器与篮框形成一组清楚的受力关系。" },
         { "id": "rowboat", "title": "双桨划艇", "template": "transport", "kind": "rowboat", "action": "两支船桨绕桨架扫动", "note": "船肋、座板、桨架和两只桨叶围着船身展开。" },
@@ -41,11 +41,11 @@
     {
       "id": "systems",
       "title": "网站结构",
-      "english": "DIGITAL SYSTEMS · 03",
+      "english": "DIGITAL SYSTEMS / 03",
       "note": "把看不见的请求与关系，\n变成可以触碰的实体结构。",
       "figures": [
         { "id": "sitemap", "title": "站点目录", "source": "sitemap.js", "action": "页面选中后逐层展开", "note": "一张页面卡片向外抽出，同组卡片和上层抽屉随之显露。" },
-        { "id": "server-rack", "title": "服务器机柜", "source": "server-rack.js", "action": "被指向的托盘抽出", "note": "导轨、硬盘仓、风扇和状态点都分布在五层机架里。" },
+        { "id": "server-rack", "title": "服务器机柜", "source": "server-rack.js", "action": "被触碰的托盘抽出", "note": "导轨、硬盘仓、风扇和状态点都分布在五层机架里。" },
         { "id": "routes", "title": "路径交换台", "source": "routes.js", "action": "选中接头抬起，邻线随动", "note": "从端口拔出的跳线抬离面板，附近线路轻微松弛。" },
         { "id": "dns-resolver", "title": "DNS 解析器", "template": "systems", "kind": "dns", "action": "查询沿递归层级逐站上行", "note": "缓存、递归器、根节点与权威节点排成一条可追踪的查询链。" },
         { "id": "load-balancer", "title": "负载均衡器", "template": "systems", "kind": "balancer", "action": "分流鼓轮转向空闲节点", "note": "入口汇入中心转盘，再从四条线路分到不同服务组。" },
@@ -59,14 +59,14 @@
     {
       "id": "masterpieces",
       "title": "世界名画",
-      "english": "MASTERPIECES · 04",
+      "english": "MASTERPIECES / 04",
       "note": "不复制画布，而从一处标志性结构出发，\n把名画的构图变成可触摸的线描小景。",
       "figures": [
         { "id": "mona-lisa", "title": "《蒙娜丽莎》", "template": "paintings", "kind": "mona", "artist": "列奥纳多·达·芬奇", "year": "约 1503–1519", "action": "远山沿视线层层退开", "note": "把肖像、交叠的手与远处的拱桥和山脊压进一座透视画框。" },
-        { "id": "starry-night", "title": "《星月夜》", "template": "paintings", "kind": "starry", "artist": "文森特·梵高", "year": "1889", "action": "星云随指针卷起涡流", "note": "柏树、教堂与层层卷曲的夜空形成前后两种尺度。" },
-        { "id": "great-wave", "title": "《神奈川冲浪里》", "template": "paintings", "kind": "wave", "artist": "葛饰北斋", "year": "约 1831", "action": "浪尖随指针抬起回卷", "note": "浪峰分成内外两道弧线，小舟与远处富士山压低尺度。" },
+        { "id": "starry-night", "title": "《星月夜》", "template": "paintings", "kind": "starry", "artist": "文森特·梵高", "year": "1889", "action": "星云随手卷起涡流", "note": "柏树、教堂与层层卷曲的夜空形成前后两种尺度。" },
+        { "id": "great-wave", "title": "《神奈川冲浪里》", "template": "paintings", "kind": "wave", "artist": "葛饰北斋", "year": "约 1831", "action": "浪尖随手抬起回卷", "note": "浪峰分成内外两道弧线，小舟与远处富士山压低尺度。" },
         { "id": "pearl-earring", "title": "《戴珍珠耳环的少女》", "template": "paintings", "kind": "pearl", "artist": "约翰内斯·维米尔", "year": "约 1665", "action": "珍珠在颈侧轻轻摆动", "note": "侧转的面部、头巾褶层与单颗悬垂珍珠构成肖像焦点。" },
-        { "id": "the-scream", "title": "《呐喊》", "template": "paintings", "kind": "scream", "artist": "爱德华·蒙克", "year": "1893", "action": "桥外的天空向指针起伏", "note": "桥面透视线把人物留在前景，远方天空围绕峡湾起伏。" },
+        { "id": "the-scream", "title": "《呐喊》", "template": "paintings", "kind": "scream", "artist": "爱德华·蒙克", "year": "1893", "action": "桥外的天空随手起伏", "note": "桥面透视线把人物留在前景，远方天空围绕峡湾起伏。" },
         { "id": "water-lilies", "title": "《睡莲》", "template": "paintings", "kind": "lilies", "artist": "克洛德·莫奈", "year": "约 1916", "action": "水面涟漪绕过睡莲叶扩散", "note": "漂浮叶片、花茎与水面同心纹组成一块俯视的池塘。" },
         { "id": "birth-of-venus", "title": "《维纳斯的诞生》", "template": "paintings", "kind": "venus", "artist": "桑德罗·波提切利", "year": "约 1485", "action": "贝壳沿铰线缓缓展开", "note": "扇形贝壳、立像轮廓与两侧风带重新搭成画面的中心轴。" },
         { "id": "the-kiss", "title": "《吻》", "template": "paintings", "kind": "kiss", "artist": "古斯塔夫·克里姆特", "year": "1907–1908", "action": "披毯边缘随拥抱收拢", "note": "两个人物的姿态与衣袍几何纹样绕着一个拥抱收紧。" },
@@ -77,7 +77,7 @@
     {
       "id": "mechanics",
       "title": "机械原理",
-      "english": "MECHANICS · 05",
+      "english": "MECHANICS / 05",
       "note": "从输入到输出。\n让力、转动与位移在同一机构里相遇。",
       "figures": [
         { "id": "gear-train", "title": "齿轮传动", "template": "mechanics", "kind": "gears", "action": "主动轮带动从动轮反向啮合", "note": "两种齿数、中心轴和轮辐展示传动比与反向旋转。" },

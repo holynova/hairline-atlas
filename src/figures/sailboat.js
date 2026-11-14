@@ -78,15 +78,15 @@ function mount({ stage, svg, read }, reach) {
   const B = register(stage, (dt) => { const moving = stepS(sheet, dt); if (moving) draw(); return moving; });
   bag.add(B.unregister);
   let lastX = 200;
-  function aim(x) { lastX = x; sheet.t = rad(clamp((x - 200) / 125, -1, 1) * reach); read.textContent = "sheet"; B.wake(); }
-  bag.add(pointer(stage, { move: ([x]) => aim(x), leave: () => { sheet.t = rad(10); read.textContent = "rest"; B.wake(); } }));
+  function aim(x) { lastX = x; sheet.t = rad(clamp((x - 200) / 125, -1, 1) * reach); read.textContent = "帆索"; B.wake(); }
+  bag.add(pointer(stage, { move: ([x]) => aim(x), leave: () => { sheet.t = rad(10); read.textContent = "静止"; B.wake(); } }));
   bag.add(() => svg.replaceChildren());
-  return { set: (v) => { reach = v; if (read.textContent === "sheet") aim(lastX); }, destroy: bag.dispose };
+  return { set: (v) => { reach = v; if (read.textContent === "帆索") aim(lastX); }, destroy: bag.dispose };
 }
 
 hairline({
   name: "sailboat",
-  means: "A sail swings around its mast to catch the direction of the pointer.",
+  means: "主帆随风向绕桅杆摆动。",
   rules: [1, 3, 4, 8, 9],
   range: [16, 36, 48],
   tour: [[126, 162], [206, 137], [280, 158], null],

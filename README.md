@@ -8,10 +8,12 @@ English: Fifty pointer-responsive line drawings across everyday objects, transpo
 
 ## 在线体验 / Live Demo
 
-- [Cloudflare Demo](https://hairline-atlas.xiaosang.cc/)（HTTPS 与页面验证进行中）
+- [在线体验](https://holynova.github.io/hairline-atlas/)（GitHub Pages）
 - [GitHub Repo](https://github.com/holynova/hairline-atlas)
 
-<img src="./assets/qr.png" width="180" alt="QR code for the Hairline Atlas Cloudflare demo">
+> 注：Cloudflare 自定义域名 hairline-atlas.xiaosang.cc 目前无法访问（2026-11-14 核实），待重新部署后再启用；当前以 GitHub Pages 为准。
+
+<img src="./assets/qr.png" width="180" alt="扫码访问线感物集">
 
 ## 本地运行 / Run locally
 

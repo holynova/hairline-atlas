@@ -87,7 +87,7 @@ function mount({ stage, svg, read }, lift) {
       route.slot.classList.toggle("hi", route.i === shown); route.slot.classList.toggle("lo", route.i !== shown);
       route.led.classList.toggle("dot", route.i === shown); route.led.classList.toggle("off", route.i !== shown);
     });
-    read.textContent = i < 0 ? "rest" : `route ${String(i + 1).padStart(2, "0")}`;
+    read.textContent = i < 0 ? "静止" : `线路 ${String(i + 1).padStart(2, "0")}`;
     B.wake();
   }
   bag.add(pointer(stage, { move: (p) => select(choose(p)), leave: () => select(-1) }));
@@ -97,7 +97,7 @@ function mount({ stage, svg, read }, lift) {
 
 hairline({
   name: "routes",
-  means: "A network switch releases a connector; its patch cable lifts from the fixed jack.",
+  means: "选中接头抬起，邻线随动。",
   rules: [1, 2, 3, 4, 6, 8, 9],
   range: [34, 66, 76],
   tour: [[126, 194], [190, 214], [274, 194], null],

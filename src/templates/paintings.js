@@ -205,7 +205,7 @@ function mount({ stage, svg, read }, span) {
 
   active=mk("path",{class:"nf hi"},g);draw();const B=register(stage,dt=>{const before=s.x,moving=stepS(s,dt);if(moving||s.x!==before)draw();return moving;});bag.add(B.unregister);
   function aim(x){last=x;s.t=clamp((x-200)/90,-1,1)*span;read.textContent=SPEC.readout;B.wake();}
-  bag.add(pointer(stage,{move:([x])=>aim(x),leave:()=>{s.t=0;read.textContent="rest";B.wake();}}));bag.add(()=>svg.replaceChildren());
-  return {set:v=>{span=v;if(read.textContent!=="rest")aim(last);},destroy:bag.dispose};
+  bag.add(pointer(stage,{move:([x])=>aim(x),leave:()=>{s.t=0;read.textContent="静止";B.wake();}}));bag.add(()=>svg.replaceChildren());
+  return {set:v=>{span=v;if(read.textContent!=="静止")aim(last);},destroy:bag.dispose};
 }
 hairline({name:SPEC.id,means:SPEC.means,rules:[1,3,4,8,9],range:SPEC.range,answer:SPEC.answer,edge:SPEC.edge,tour:SPEC.tour,mount});

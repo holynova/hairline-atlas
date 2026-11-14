@@ -651,8 +651,8 @@ var HL = (() => {
   }
 
   // packages/hairline/src/core/styles.ts
-  var LIGHT = { plate: "#ffffff", hi: "#232327", edge: "#a4a4ac", mid: "#c3c3c9", lo: "#e0e0e4" };
-  var DARK = { plate: "#08090a", hi: "#d0d6e0", edge: "#5b5d64", mid: "#3e3e44", lo: "#29292d" };
+  var LIGHT = { plate: "#ffffff", hi: "#26221e", edge: "#a8a094", mid: "#c6beb0", lo: "#e3ded2" };
+  var DARK = { plate: "#0b0a09", hi: "#d8d2c8", edge: "#5e584e", mid: "#423c34", lo: "#2c2824" };
   var KEYS = ["plate", "hi", "edge", "mid", "lo"];
   var vars = (p) => KEYS.map((k) => `--hl-${k}:var(--hairline-${k},${p[k]});`).join("");
   var EASE = "cubic-bezier(0.5,0,0.1,1)";
