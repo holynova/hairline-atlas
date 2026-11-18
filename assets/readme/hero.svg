@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="1200" height="360" viewBox="0 0 1200 360"
+     role="img" aria-labelledby="title desc">
+  <title id="title">线感物集 Hairline Atlas — 五组可以触摸的线稿</title>
+  <desc id="desc">暖纸底标题：线感物集，让线条动起来；右侧是一幅细线条水壶线稿，壶盖旁有红色圆点与虚线，示意壶盖随指针升起。</desc>
+
+  <rect width="1200" height="360" rx="26" fill="#f4f1ea"/>
+
+  <g id="title-block" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <text x="56" y="62" font-size="19" letter-spacing="3" fill="#5f574a">HAIRLINE ATLAS · 五组可以触摸的线稿 / 2026</text>
+    <text x="56" y="128" font-size="62" font-weight="700" fill="#1c1a16">线感物集</text>
+    <text x="56" y="168" font-size="23" fill="#3a352c">让线条动起来。</text>
+    <text x="56" y="204" font-size="19" fill="#5f574a">日常物件、交通工具、网站结构、世界名画、机械原理。</text>
+    <g id="chips" font-size="18" fill="#1c1a16" text-anchor="middle">
+      <g><rect x="56" y="238" width="126" height="36" rx="18" fill="#e8e2d4" stroke="#d8cfb8" stroke-width="1.5"/><text x="119" y="262">50 张线稿</text></g>
+      <g><rect x="194" y="238" width="110" height="36" rx="18" fill="#e8e2d4" stroke="#d8cfb8" stroke-width="1.5"/><text x="249" y="262">5 个章节</text></g>
+      <g><rect x="316" y="238" width="110" height="36" rx="18" fill="#e8e2d4" stroke="#d8cfb8" stroke-width="1.5"/><text x="371" y="262">指针交互</text></g>
+      <g><rect x="438" y="238" width="126" height="36" rx="18" fill="#e8e2d4" stroke="#d8cfb8" stroke-width="1.5"/><text x="501" y="262">可单张打开</text></g>
+    </g>
+    <text x="56" y="316" font-size="17" fill="#5f574a">Hairline 引擎与方法：Lucas Marques（MIT）</text>
+  </g>
+
+  <text id="kettle-caption" x="975" y="344" font-size="18" fill="#5f574a" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif">水壶 · 壶盖随指针升起</text>
+
+  <g id="kettle" fill="none" stroke-linecap="round">
+    <!-- 构造线 -->
+    <ellipse cx="975" cy="180" rx="120" ry="105" stroke="#c9c0ae" stroke-width="1" stroke-dasharray="4 5"/>
+    <ellipse cx="975" cy="262" rx="95" ry="18" stroke="#c9c0ae" stroke-width="1" stroke-dasharray="4 5"/>
+    <!-- 壶身 -->
+    <path d="M915,105 C900,160 895,220 912,258 L1038,258 C1055,220 1050,160 1035,105" stroke="#1c1a16" stroke-width="2.5"/>
+    <path d="M912,258 C930,272 1020,272 1038,258" stroke="#1c1a16" stroke-width="2.5"/>
+    <!-- 壶盖 -->
+    <ellipse cx="975" cy="100" rx="58" ry="13" stroke="#1c1a16" stroke-width="2.5"/>
+    <line x1="975" y1="87" x2="975" y2="76" stroke="#1c1a16" stroke-width="2.5"/>
+    <circle cx="975" cy="71" r="6" stroke="#1c1a16" stroke-width="2.5"/>
+    <!-- 壶嘴 -->
+    <path d="M1036,150 C1072,142 1090,122 1096,100" stroke="#1c1a16" stroke-width="2.5"/>
+    <path d="M1096,100 C1092,112 1082,118 1072,120" stroke="#1c1a16" stroke-width="2"/>
+    <!-- 壶把 -->
+    <path d="M914,132 C882,142 876,192 900,222" stroke="#1c1a16" stroke-width="2.5"/>
+    <!-- 升起示意 -->
+    <line x1="975" y1="58" x2="975" y2="34" stroke="#c0392b" stroke-width="2" stroke-dasharray="4 4"/>
+    <polygon points="975,26 969,38 981,38" fill="#c0392b" stroke="none"/>
+    <circle cx="975" cy="71" r="3" fill="#c0392b" stroke="none"/>
+    <!-- 强度滑块 -->
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+      <line x1="830" y1="292" x2="1120" y2="292" stroke="#a89a7a" stroke-width="1.5"/>
+      <circle cx="975" cy="292" r="7" fill="#f4f1ea" stroke="#1c1a16" stroke-width="2"/>
+      <text x="830" y="314" font-size="16" fill="#5f574a" stroke="none">intensity</text>
+      <text x="1120" y="314" font-size="16" fill="#5f574a" stroke="none" text-anchor="end">50</text>
+    </g>
+  </g>
+</svg>
