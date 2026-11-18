@@ -1,24 +1,24 @@
+<p align="right"><a href="README.en.md">English</a></p>
+
 <p align="center">
   <img src="./assets/readme/hero.svg" width="100%" alt="线感物集 Hairline Atlas — 五组可以触摸的线稿：右侧是一幅细线条水壶线稿，壶盖旁有红色圆点与虚线，示意壶盖随指针升起">
 </p>
 
 <p align="center">
-  <a href="https://holynova.github.io/hairline-atlas/">▶ 在线体验 View Online</a>
+  <a href="https://holynova.github.io/hairline-atlas/">▶ 在线体验</a>
   ·
   <a href="https://github.com/holynova/hairline-atlas">GitHub 仓库</a>
 </p>
 
 线感物集是五组可以触摸的互动线稿图集：日常物件、交通工具、网站结构、世界名画、机械原理各十张，共 50 张。指针移上图面，部件就跟着动——水壶盖随指针升起，表冠带动指针走时；每张作品也可单独打开与播放。
 
-Fifty pointer-responsive line drawings across five chapters — everyday objects, transport, digital systems, world masterpieces, and mechanical principles. Move the pointer over a figure and its parts move: a kettle lid lifts as the pointer rises, a watch crown drives the hands. Each figure opens as a standalone interactive page.
-
-## 截图 / Screenshots
+## 截图
 
 <p align="center">
   <img src="./assets/screenshot.png" width="640" alt="线感物集首页：让线条动起来，右侧 50 张独立线稿索引；下方第一章日常物件，水壶线稿带强度滑块与播放按钮">
 </p>
 
-## 五章五十张 / Five Chapters
+## 五章五十张
 
 | 章节 | 10 张 |
 | --- | --- |
@@ -28,7 +28,7 @@ Fifty pointer-responsive line drawings across five chapters — everyday objects
 | 04 世界名画 | 《蒙娜丽莎》、《星月夜》、《神奈川冲浪里》、《戴珍珠耳环的少女》、《呐喊》、《睡莲》、《维纳斯的诞生》、《吻》、《夜巡》、《宫娥》 |
 | 05 机械原理 | 齿轮传动、曲柄滑块、凸轮从动件、滑轮组、剪式千斤顶、棘轮棘爪、齿条齿轮、四杆机构、日内瓦机构、螺旋压机 |
 
-## 玩法 / How It Works
+## 玩法
 
 - **指针触发动作**：鼠标（或触摸）移到图面上，部件随指针位置动起来；移开则回到静止态。
 - **强度滑块**：每张图都有 intensity 滑块，调动作幅度。
@@ -36,7 +36,7 @@ Fifty pointer-responsive line drawings across five chapters — everyday objects
 - **单张打开**：每张作品都是独立页面（`figures/<name>.html`），可单独打开、播放与分享。
 - **名画不复制画布**：世界名画一章从一处标志性结构出发，把构图变成可触摸的线描小景。
 
-## 本地运行 / Run Locally
+## 本地运行
 
 需要 Node.js 20+ 与 Python 3。构建脚本把 `figures/` 与首页汇编到 `dist/`，再用 Python 静态服务器打开：
 
@@ -48,7 +48,7 @@ npm run dev
 
 只改一张图时也可直接用静态服务器打开仓库根目录，访问 `figures/<name>.html`。
 
-## 技术 / Tech
+## 技术
 
 - 每张线稿是独立的单文件 HTML（SVG 线条 + 指针驱动的 JS 动作），`figures/` 共 50 个；首页 `index.html` 用 iframe 嵌入各图。
 - 构建：`npm run build`（`scripts/build-figures.mjs`）生成 `dist/`。
@@ -62,16 +62,3 @@ src/                    图集源码：目录数据、9 张原创图 JS、5 章�
 scripts/build-figures.mjs   构建脚本（生成 dist/）
 assets/screenshot.png   首页截图
 ```
-
-## English
-
-**Hairline Atlas** is a collection of fifty pointer-responsive line drawings in five chapters of ten: everyday objects, transport, digital systems, world masterpieces, and mechanical principles.
-
-- **Objects**: kettle, umbrella, camera, articulated lamp, moka pot, twin-bell clock, turntable, tailor's scissors, sewing machine, wristwatch.
-- **Transport**: bicycle, tram, sailboat, steam locomotive, helicopter, biplane, hot-air balloon, rowboat, cable car, roadster.
-- **Systems**: sitemap, server rack, routes, DNS resolver, load balancer, cache hierarchy, event queue, B-tree index, auth gate, edge CDN.
-- **Masterpieces**: Mona Lisa, Starry Night, The Great Wave, Girl with a Pearl Earring, The Scream, Water Lilies, The Birth of Venus, The Kiss, The Night Watch, Las Meninas — each reduced to one signature structure as a touchable line sketch, not a copy of the canvas.
-- **Mechanics**: gear train, crank-slider, cam-follower, block-and-tackle, scissor jack, ratchet-pawl, rack-and-pinion, four-bar linkage, Geneva drive, screw press.
-- **How it works**: move the pointer over a figure and its parts respond; an intensity slider sets the motion range; play runs one full cycle; light/dark themes; every figure is a standalone page under `figures/`.
-- **Run it**: Node 20+ and Python 3 — `npm install && npm run dev` (builds to `dist/` and serves on port 8080).
-- **Tech**: each figure is a self-contained HTML file (SVG lines + pointer-driven JS); the index embeds them via iframes. The Hairline figure engine and method are by Lucas Marques, used under the MIT license — see [the Hairline skill](https://hairline.lucasmarkes.com/skill) and [upstream source](https://github.com/lucasmarkes/hairline).
